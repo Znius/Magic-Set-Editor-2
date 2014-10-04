@@ -1,0 +1,511 @@
+﻿mse version: 0.3.8
+game: yugioh
+short name: 9thGeneration
+installer group: Yugioh/9thGen
+icon: card-sample.png
+position hint: 01
+
+version: 2009-08-08
+depends on:
+	package: yugioh.mse-game
+	version: 2009-08-08
+depends on:
+	package: yugioh-standard-levels.mse-symbol-font
+	version: 2007-10-27
+depends on:
+	package: yugioh-text-replacements.mse-symbol-font
+	version: 2008-01-04
+
+card width: 361
+card height: 523
+card dpi: 152.6265
+
+############################################################## Extra scripts
+############################################################## Extra style
+styling field:
+	type: choice
+	name: 语言
+	description: 你想要什么语言？
+	initial: 中文
+	choice: 中文
+	choice: English
+	choice: 日本語
+	choice: 한국어
+styling field:
+	type: boolean
+	name: 防伪标识
+	description: 你想要让防伪标识显示吗？
+	initial: yes
+styling field:
+	type: choice
+	name: 摇摆效果栏
+	description: 你要大的还要小的？
+	initial: 大
+	choice: 大
+	choice: 小
+############################################################## Card fields
+card style:
+	############################# Background stuff
+	card type:
+		left: 0
+		top: 0
+		width: 361
+		height: 523
+		z index: -2
+		render style: image
+		popup style: in place
+		choice images:
+			normal monster: card-normal.png
+			effect monster: card-effect.png
+			ritual monster: card-ritual.png
+			synchro monster: card-synchro.png
+			dark synchro monster: card-dsynchro.png
+			xyz monster: card-xyz.png
+			fusion monster: card-fusion.png
+			token monster: card-token.png
+			obelisk: card-obelisk.png
+			slifer: card-slifer.png
+			ra: card-ra.png
+			legendary dragons: card-dragons.png
+			normal pendulum monster: { if styling.摇摆效果栏=="大" then "card-npenduluml.png" else if styling.摇摆效果栏=="小" then "card-npendulums.png" }
+			effect pendulum monster: { if styling.摇摆效果栏=="大" then "card-ependuluml.png" else if styling.摇摆效果栏=="小" then "card-ependulums.png" }
+			spell card: card-spell.png
+			trap card: card-trap.png
+	foils:
+		left: 
+			script:
+				if card.rarity=="平行线闪" then 0
+				else if card.rarity=="镀金" then 0
+				else if card.rarity=="镀金 摇摆怪兽 大型" then 0
+				else if card.rarity=="镀金 摇摆怪兽 小型" then 0
+				else if card.rarity=="镀金彩闪" then 0
+				else if card.rarity=="镀金彩闪 摇摆怪兽 大型" then 0
+				else if card.rarity=="镀金彩闪 摇摆怪兽 小型" then 0
+				else if is_pendulum() then 28.5
+				else 47.5
+		top:
+			script:
+				if card.rarity=="平行线闪" then 0
+				else if card.rarity=="镀金" then 0
+				else if card.rarity=="镀金 摇摆怪兽 大型" then 0
+				else if card.rarity=="镀金 摇摆怪兽 小型" then 0
+				else if card.rarity=="镀金彩闪" then 0
+				else if card.rarity=="镀金彩闪 摇摆怪兽 大型" then 0
+				else if card.rarity=="镀金彩闪 摇摆怪兽 小型" then 0
+				else if is_pendulum() then 95
+				else 96
+		width:
+			script:
+				if card.rarity=="平行线闪" then 361
+				else if card.rarity=="镀金" then 361
+				else if card.rarity=="镀金 摇摆怪兽 大型" then 361
+				else if card.rarity=="镀金 摇摆怪兽 小型" then 361
+				else if card.rarity=="镀金彩闪" then 361
+				else if card.rarity=="镀金彩闪 摇摆怪兽 大型" then 361
+				else if card.rarity=="镀金彩闪 摇摆怪兽 小型" then 361
+				else if is_pendulum() then 304
+				else 266
+		height:
+			script:
+				if card.rarity=="平行线闪" then 523
+				else if card.rarity=="镀金" then 523
+				else if card.rarity=="镀金 摇摆怪兽 大型" then 523
+				else if card.rarity=="镀金 摇摆怪兽 小型" then 523
+				else if card.rarity=="镀金彩闪" then 523
+				else if card.rarity=="镀金彩闪 摇摆怪兽 大型" then 523
+				else if card.rarity=="镀金彩闪 摇摆怪兽 小型" then 523
+				else if styling.摇摆效果栏=="大" and is_pendulum() then 233.5
+				else if styling.摇摆效果栏=="小" and is_pendulum() then 251
+				else 272
+		z index: 5
+		render style: image
+		popup style: in place
+		image:
+			script:	
+				if card.rarity=="面闪" then "superfoil.png"
+				else if card.rarity=="金字面闪" then "superfoil.png"
+				else if card.rarity=="彩闪" then "secretfoil.png"
+				else if card.rarity=="究极闪" then "ultimaterfoil.png"
+				else if card.rarity=="平行线闪" then "parallelfoil.png"
+				else if card.rarity=="镀金" then "goldfoil.png"
+				else if card.rarity=="镀金 摇摆怪兽 大型" then "pgoldfoill.png" 
+				else if card.rarity=="镀金 摇摆怪兽 小型" then "pgoldfoils.png"
+				else if card.rarity=="镀金彩闪" then "goldsfoil.png"
+				else if card.rarity=="镀金彩闪 摇摆怪兽 大型" then "pgoldsfoill.png"
+				else if card.rarity=="镀金彩闪 摇摆怪兽 小型" then "pgoldsfoils.png"
+				else "blank2.png"
+	############################# Name line
+	name:
+		left: 34
+		top: 25
+		width: 256
+		height: 37
+		alignment: middle shrink-overflow
+		padding bottom: 0
+		z index: 2
+		font:
+			name: { if styling.语言=="中文" then "DFPLiShuW5-B5" else if styling.语言=="日本語" then "DFP菜菜" else if styling.语言=="한국어" then "KoreanYSB" else "MatrixRegularSmallCaps" }
+			size: { if styling.语言=="中文" then 22 else if styling.语言=="日本語" then 24 else if styling.语言=="한국어" then 22 else 28 }
+			color:
+				script: if card.rarity=="银字" then rgb(230,230,230)
+				else if card.rarity=="彩闪" then rgb(230,230,230)
+				else if card.rarity=="金字面闪" then rgb(216,199,53)
+				else if card.rarity=="究极闪" then rgb(60,0,0)
+				else if card.rarity=="平行线闪" then rgb(216,199,53)
+				else if card.rarity=="镀金" then rgb(216,199,53)
+				else if card.rarity=="镀金彩闪" then rgb(216,199,53)
+				else if card.rarity=="镀金 摇摆怪兽 大型" then rgb(216,199,53)
+				else if card.rarity=="镀金 摇摆怪兽 小型" then rgb(216,199,53)
+				else if card.rarity=="镀金彩闪 摇摆怪兽" then rgb(216,199,53)
+				else if card.card_type=="xyz monster" then rgb(255,255,255)
+				else if is_nmonster() then rgb(255,255,255)
+				else rgb(0,0,0)
+	attribute:
+		left: 294.5
+		top : 25
+		width: 37
+		height: 37
+		z index: 2
+		render style: image
+		popup style: in place
+		choice images:
+			earth: { if styling.语言=="English" then "earth.png" else if styling.语言=="한국어" then "earth3.png" else "earth2.png" }
+			water: { if styling.语言=="English" then "water.png" else if styling.语言=="한국어" then "water3.png"else "water2.png" }
+			fire: { if styling.语言=="English" then "fire.png" else if styling.语言=="한국어" then "fire3.png" else "fire2.png" }
+			wind: { if styling.语言=="English" then "wind.png" else if styling.语言=="한국어" then "wind3.png" else "wind2.png" }
+			light: { if styling.语言=="English" then "light.png" else if styling.语言=="한국어" then "light3.png" else "light2.png" }
+			dark: { if styling.语言=="English" then "dark.png" else if styling.语言=="한국어" then "dark3.png" else "dark2.png" }
+			divine: { if styling.语言=="English" then "divine.png" else  if styling.语言=="한국어" then "divine3.png" else "divine2.png" }
+			spell: { if styling.语言=="English" then "spell.png" else  if styling.语言=="한국어" then "spell3.png" else "spell2.png" }
+			trap: { if styling.语言=="English" then "trap.png" else  if styling.语言=="한국어" then "trap3.png" else "trap2.png" }
+	level:
+		left: 48
+		top: 62
+		height: 31
+		width: 272
+		z index: 2
+		alignment: 
+			script: if card.card_type=="xyz monster" then "middle left" else
+			if card.card_type=="dark synchro monster" then "middle left" else "middle right"
+		font:
+			name: { if styling.语言=="中文" then "DFPLiShuW5-B5" else if styling.语言=="日本語" then "DFP菜菜" else if styling.语言=="한국어" then "SD Book-B" else "MatrixBoldSmallCaps" }
+			italic name: { if styling.语言=="中文" then "DFPLiShuW5-B5" else if styling.语言=="日本語" then "DFP菜菜" else if styling.语言=="한국어" then "SD Book-B" else "Matrix" }
+			size: { if styling.语言=="한국어" then 14 else 17 }
+			color: rgb(0,0,0)
+		symbol font:
+			name: yugioh-standard-levels
+			alignment: middle center
+			scale down to: 1
+			size: 7
+	############################# Image
+	image:
+		left: script: if is_pendulum() then 29 else 47.5
+		top: script: if is_pendulum() then 95 else 96
+		width: script: if is_pendulum() then 303 else 266.5
+		height: script: if is_pendulum() then 294 else 272.5
+		z index: 1
+		mask: script: if is_npendulum() then "nothing.png" else if styling.摇摆效果栏=="大" then "mask_penduluml.png" else if styling.摇摆效果栏=="小" then "mask_pendulums.png" else "nothing.png"
+	############################# Card type
+	monster type:
+		left: { if styling.语言=="English" then 39.5 else 40.5 }
+		top : { if styling.语言=="English" then 396.5 else 395 }
+		width: { card_style.monster_type.content_width + 6 }
+		height: 14
+		alignment: middle left
+		z index: 2
+		font:
+			name: { if styling.语言=="中文" then "DFPLiShuW5-B5" else if styling.语言=="日本語" then "DFP菜菜" else if styling.语言=="한국어" then "SD Book-B" else "MatrixBoldSmallCaps" }
+			italic name: { if styling.语言=="中文" then "DFPLiShuW5-B5" else if styling.语言=="日本語" then "DFP菜菜" else if styling.语言=="한국어" then "SD Book-B" else "Matrix" }
+			size: { if styling.语言=="한국어" then 9 else 11 }
+			color: rgb(0,0,0)
+		symbol font:
+			name: yugioh-text-replacements
+			alignment: middle center
+			size: 3.5
+		visible: script: if is_nmonster() then false else true
+	############################# Edition and Card ID
+	number:
+		left: script: if is_pendulum() then 33 else 203
+		top : script: if is_pendulum() then 476 else 373
+		width: 115
+		height: 15
+		z index: 2
+		alignment: script: if is_pendulum() then "top left" else "top right"
+		font:
+			name: Palatino Linotype
+			size: 8
+			color: 
+				script: if card.card_type=="xyz monster" then rgb(255,255,255)
+				else rgb(0,0,0)
+	edition:
+		left: script: if is_pendulum() then 237 else 43
+		top: script: if is_pendulum() then 393 else 372.5
+		width: script: if is_pendulum() then 90 else 115
+		height: 15
+		z index: 2
+		alignment: script: if is_pendulum() then "middle right" else "middle left"
+		font:
+			name: { if card.edition=="DUEL TERMINAL" then "BankGothic Md BT" else "Palatino Linotype Bold" }
+			size: { if card.edition=="DUEL TERMINAL" then 11 else 9 }
+			color: 
+				script: if card.card_type=="xyz monster" then rgb(255,255,255)
+				else rgb(0,0,0)
+	############################# Text box
+	rule text:
+		left: 33
+		top :
+			script: if is_nmonster() then 393.5 else 408.5
+		width: 295.5
+		height:
+			script: if is_nmonster() then 95.5 else 64.5
+		font:
+			name: { if styling.语言=="中文" then "DFPLiShuW5-B5" else if styling.语言=="日本語" then "DFP菜菜" else if styling.语言=="한국어" then "SD Book-L" else "MatrixBook" }
+			size: { if styling.语言=="한국어" then "9" else "10" }
+			scale down to: 4
+			color: rgb(0,0,0)
+		symbol font:
+			name: yugioh-text-replacements
+			alignment: middle center
+			size: 3.5
+		alignment: top left
+		z index: 3
+		padding left: 1
+		padding top: 2
+		padding right: 0
+		padding bottom: 0
+		line height hard: 1.0
+		line height line: 1.0
+		line height soft: 0.9
+		line height hard max: 1.1
+		line height line max: 1.1
+	pendulum text:
+		left: 59
+		top: script: if styling.摇摆效果栏=="大" then 332 else if styling.摇摆效果栏=="小" then 348 else 999
+		width: 242.5
+		height: script: if styling.摇摆效果栏=="小" then 40 else 56
+		font:
+			name: { if styling.语言=="中文" then "DFPLiShuW5-B5" else if styling.语言=="日本語" then "DFP菜菜" else if styling.语言=="한국어" then "SD Book-L" else "MatrixBook" }
+			size: 7.5
+			scale down to: 4
+			color: rgb(0,0,0)
+		symbol font:
+			name: yugioh-text-replacements
+			alignment: middle center
+			size: 3.5
+		alignment: top left
+		z index: 3
+		padding left: 1
+		padding top: 2
+		padding right: 0
+		padding bottom: 0
+		line height hard: 1.0
+		line height line: 1.0
+		line height soft: 0.9
+		line height hard max: 1.1
+		line height line max: 1.1
+		visible: 
+			script: if is_pendulum() then true else false
+	pendulum scale 1:
+		left: 29
+		top: script: if styling.摇摆效果栏=="大" then 350.5 else if styling.摇摆效果栏=="小" then 356.5 else 999
+		width: 27
+		height: 30
+		z index: 2
+		alignment: bottom center
+		font:
+			name: MatrixBoldSmallCaps
+			italic name: Matrix-Bold
+			size: 18
+			color: rgb(0,0,0)
+		visible: script: if is_pendulum() then true else false
+	pendulum scale 2:
+		left: 305
+		top: script: if styling.摇摆效果栏=="大" then 350.5 else if styling.摇摆效果栏=="小" then 356.5 else 999
+		width: 27
+		height: 30
+		z index: 2
+		alignment: bottom center
+		font:
+			name: MatrixBoldSmallCaps
+			italic name: Matrix-Bold
+			size: 18
+			color: rgb(0,0,0)
+		visible: script: if is_pendulum() then true else false
+	############################# Attack/Defense
+	attack:
+		left: 204
+		top: 475
+		width: 48
+		height: 18
+		z index: 2
+		alignment: right middle
+		font:
+			name: MatrixBoldSmallCaps
+			italic name: Matrix-Bold
+			size: 12
+			color: rgb(0,0,0)
+		symbol font:
+			name: yugioh-text-replacements
+			alignment: middle center
+			size: 6
+		visible: script: if is_nmonster() then false else true
+	defense:
+		z index: 4
+		left: 278
+		top: 475
+		width: 48
+		height: 18
+		z index: 2
+		alignment: right middle
+		font:
+			name: MatrixBoldSmallCaps
+			italic name: Matrix-Bold
+			size: 12
+			color: rgb(0,0,0)
+		symbol font:
+			name: yugioh-text-replacements
+			alignment: middle center
+			size: 6
+		visible: script: if is_nmonster() then false else true
+	############################# Card sorting / numbering
+	############################# Copyright stuff
+	gamecode:
+		left: 16
+		top : 494
+		width: 96
+		height: 18
+		alignment: middle left
+		z index: 2
+		font:
+			name: Palatino Linotype
+			size: 8
+			color: 
+				script: if card.card_type=="xyz monster" then rgb(255,255,255)
+				else rgb(0,0,0)
+	rarity:
+		left: 332
+		top : 492
+		height: 20
+		width: 20
+		z index: 3
+		render style: image
+		popup style: in place
+		choice images:
+			普通: blank2.png
+			银字: blank2.png
+			面闪: blank2.png
+			金字面闪: blank2.png
+			彩闪: blank2.png
+			究极闪: blank2.png
+			平行线闪: blank2.png
+			镀金: blank2.png
+			镀金 摇摆怪兽 大型: blank2.png
+			镀金 摇摆怪兽 小型: blank2.png
+			镀金彩闪: blank2.png
+			镀金彩闪 摇摆怪兽 大型: blank2.png
+			镀金彩闪 摇摆怪兽 小型: blank2.png
+	corner foil:
+		left: 332
+		top : 492
+		height: 20
+		width: 20
+		z index: 2
+		render style: image list
+		choice images:
+			stamp: { if styling.防伪标识="no" then "nocorner.png" else if card.edition!="" then "cornerfirst.png" else "cornerunlimited.png" }
+	copyright:
+		left: 180
+		top : 495
+		width: 145
+		height: 18
+		z index: 4
+		alignment: middle right
+		font:
+			name: Palatino Linotype
+			size: 7
+			color: 
+				script: if card.card_type=="xyz monster" then rgb(255,255,255)
+				else rgb(0,0,0)
+############################################extra card field:
+extra card field:
+	type: choice
+	name: bar
+	choice: bar
+	editable: false
+extra card field:
+	type: choice
+	name: leftbracket
+	choice: lbracket
+	editable: false
+extra card field:
+	type: choice
+	name: rightbracket
+	choice: rbracket
+	editable: false
+extra card field:
+	type: text
+	name: atkoverlay
+	default: "ATK/"
+	editable: false
+extra card field:
+	type: text
+	name: defoverlay
+	default: "DEF/"
+	editable: false
+extra card style:
+	bar:
+		left: 33.5
+		top : 474
+		height: 1
+		width: 294.5
+		z index: 4
+		render style: image list
+		choice images:
+			bar: bar.png
+		visible: script: if is_nmonster() then false else true
+	leftbracket:
+		left: { if is_nmonster() then (309- card_style.level.content_width) else 33 }
+		top : { if styling.语言=="English" then "397" else "394" }
+		height: { if styling.语言=="English" then "12" else "16" }
+		width: { if styling.语言=="English" then "4" else "6" }
+		z index: 2
+		render style: image list
+		choice images:
+			lbracket: { if styling.语言=="English" then "/yugioh-standard-levels.mse-symbol-font/leftbracket.png" else if styling.语言=="한국어" then "/yugioh-standard-levels.mse-symbol-font/leftbracket4.png" else "/yugioh-standard-levels.mse-symbol-font/leftbracket3.png" }
+		visible: script: if is_nmonster() then false else true
+	rightbracket:
+		left: { if is_nmonster() then 315 else (card_style.monster_type.content_width + 42) }
+		top : { if styling.语言=="English" then "397" else "394" }
+		height: { if styling.语言=="English" then "12" else "16" }
+		width: { if styling.语言=="English" then "4" else "6" }
+		z index: 4
+		render style: image list
+		choice images:
+			rbracket: { if styling.语言=="English" then "/yugioh-standard-levels.mse-symbol-font/rightbracket.png" else if styling.语言=="한국어" then "/yugioh-standard-levels.mse-symbol-font/rightbracket4.png" else "/yugioh-standard-levels.mse-symbol-font/rightbracket3.png" }
+		visible: script: if is_nmonster() then false else true
+	atkoverlay:
+		left: 170
+		top: 475
+		width: 48
+		height: 18
+		z index: 1
+		alignment: right middle
+		font:
+			name: MatrixBoldSmallCaps
+			italic name: Matrix-Bold
+			size: 12
+			color: rgb(0,0,0)
+		visible: script: if is_nmonster() then false else true
+	defoverlay:
+		left: 244
+		top: 475
+		width: 48
+		height: 18
+		z index: 1
+		alignment: right middle
+		font:
+			name: MatrixBoldSmallCaps
+			italic name: Matrix-Bold
+			size: 12
+			color: rgb(0,0,0)
+		visible: script: if is_nmonster() then false else true

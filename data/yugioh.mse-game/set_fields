@@ -1,0 +1,33 @@
+﻿
+############################################################## Set fields
+set field:
+	type: info
+	name: 套牌信息
+set field:
+	type: text
+	name: 标题
+	description: 这个信息不会在卡片上适用。
+set field:
+	type: text
+	name: 内容描述
+	multi line: true
+	description: 这个信息不会在卡片上适用。
+set field:
+	type: text
+	name: 版本
+	description: 编辑此项将会在所有卡片上适用。（例：DUEL TERMINAL）
+set field:
+	type: text
+	name: 作者
+	description: 作者信息。
+set field:
+	type: boolean
+	name: 神拥有效果
+	description: 「神」怪兽有必要拥有效果么？
+	initial: yes
+############################# Default style
+default set style:
+	标题:
+		padding left: 2
+		font:
+			size: 16
